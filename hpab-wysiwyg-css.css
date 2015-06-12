@@ -1,0 +1,16 @@
+body#tinymce.hpab_content{
+            background:#e0491b;
+            background-color: #e0491b;
+            color:#ffffff;
+          }div#hp_alert{
+            background:#e0491b;
+            background-color: #e0491b;
+            color:#ffffff;
+            padding:20px;
+            margin:10px 0;
+          }div#hp_alert p,
+          div#hp_alert div,
+          div#hp_alert blockquote
+          {
+            color:#ffffff !important;
+          }
