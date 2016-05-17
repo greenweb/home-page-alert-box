@@ -37,7 +37,7 @@ function homepage_alert_box_admin_enqueue( $hook_suffix ) {
   if( $page == "dashboard" )
   {
     wp_enqueue_style( 'wp-color-picker' );
-    wp_enqueue_script( 'home-page-alert-box', plugins_url('home-page-alert-box.js', __FILE__ ), array( 'wp-color-picker' ), false, true );    
+    wp_enqueue_script( 'home-page-alert-box', plugins_url('home-page-alert-box.js', __FILE__ ), array( 'wp-color-picker' ), false, true );
   }
 
 }
@@ -80,14 +80,14 @@ function homepage_alert_box_dashboard_widget_function() {
   $hpab_bg_color    = get_option( 'hpab_bg_color', '#E0491B' );
   $hpab_text_color  = get_option( 'hpab_text_color', '#FFFFFF' );
   $hpab_body_val    = get_option( 'hpab_body_val', '' );
-  
+
   if( $hpab_is_active == 'yes' ) {
     $hpab_radio = '<input type="radio" name="hpab_is_active" value="yes" checked>Yes <input type="radio" name="hpab_is_active" value="no">No';
   }else{
     $hpab_radio = '<input type="radio" name="hpab_is_active" value="yes">Yes <input type="radio" name="hpab_is_active" value="no" checked>No';
   }
 
-  echo('<div id="hpab-description-wrap" class="textarea-wrap">');  
+  echo('<div id="hpab-description-wrap" class="textarea-wrap">');
 
   $hpab_wysiwyg_options = array(
       'media_buttons' => 0,
@@ -119,11 +119,11 @@ function homepage_alert_box_dashboard_widget_function() {
   echo('<div class="input-color-wrap">'.$hpab_lang_bgcolor_label.':<br> <input id="hpab_bg_color" name="hpab_bg_color" type="text" value="'.$hpab_bg_color.'" class="hpab-color-field" data-default-color="#E0491B"></div>');
   echo('<div class="input-color-wrap">'.$hpab_lang_textcolor_label.':<br> <input id="hpab_text_color" name="hpab_text_color" type="text" value="'.$hpab_text_color.'" class="hpab-color-field" data-default-color="#FFFFFF"></div>');
   echo('<p class="submit"><button type="button" class="button button-primary" id="save-hpab" >'.$hpab_lang_save_bnt.'</button></p><br class="clear">');
-  
+
 }
 
 // Save via AJAX
-// 
+//
 add_action( 'wp_ajax_homepage_alert_box_save',  'homepage_alert_box_save' );
 
 function homepage_alert_box_save() {
@@ -138,11 +138,11 @@ function homepage_alert_box_save() {
 function homepage_alert_box_write_css()
 {
   $file = plugin_dir_path( __FILE__ ).'hpab-wysiwyg-css.css';
-  
+
   $hpab_bg_color     =  $_REQUEST['hpab_bg_color'];
   $hpab_text_color   =  $_REQUEST['hpab_text_color'];
   $hpab_body_val     =  $_REQUEST['hpab_body_val'];
- 
+
   $css = "body#tinymce.hpab_content{
             background:$hpab_bg_color;
             background-color: $hpab_bg_color;
@@ -174,9 +174,10 @@ function homepage_alert_box_function($content) {
 
   $hpab_is_active   = get_option( 'hpab_is_active', 'yes');
   $hpab_body_val    = get_option( 'hpab_body_val', '' );
+  $hpab_body_val    = stripslashes_deep( $hpab_body_val );
 
   if( $hpab_is_active == 'yes' && $hpab_body_val !== '' && $hpab_body_val !== false ) {
-    
+
     $content = "<div id='hp_alert'>
                   $hpab_body_val
                 </div>
